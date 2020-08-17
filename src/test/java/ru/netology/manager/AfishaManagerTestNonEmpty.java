@@ -63,4 +63,47 @@ public class AfishaManagerTestNonEmpty {
     // но это уже проверка "внутренней" реализации
     verify(repository).removeById(idToRemove);
   }
+
+  @Test
+  public void shouldFindById() {
+    int idToFind = 1;
+    // настройка заглушки
+    MoviePoster[] returned = new MoviePoster[]{first};
+    doReturn(returned).when(repository).findAll();
+    doNothing().when(repository).findById(idToFind);
+
+    MoviePoster[] expected = new MoviePoster[]{first};
+    MoviePoster[] actual = repository.findAll();
+    assertArrayEquals(expected, actual);
+
+    // удостоверяемся, что заглушка была вызвана с нужным значением
+    // но это уже проверка "внутренней" реализации
+    verify(repository).findById(idToFind);
+  }
+
+  @Test
+  public void shouldNotFindById() {
+    int idToFind = 4;
+    // настройка заглушки
+    MoviePoster[] returned = new MoviePoster[]{first, second, third};
+    doReturn(returned).when(repository).findAll();
+    doNothing().when(repository).findById(idToFind);
+
+    MoviePoster[] expected = new MoviePoster[]{third, second, first};
+    MoviePoster[] actual = manager.getAll();
+    assertArrayEquals(expected, actual);
+
+    // удостоверяемся, что заглушка была вызвана с нужным значением
+    // но это уже проверка "внутренней" реализации
+    verify(repository).findById(idToFind);
+  }
+
+  @Test
+  public void shouldRemoveAll() {
+    repository.removeAll();
+
+    MoviePoster[] actual = repository.removeAll();
+    MoviePoster[] expected = new MoviePoster[]{};
+    assertArrayEquals(expected, actual);
+  }
 }

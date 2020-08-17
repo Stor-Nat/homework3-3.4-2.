@@ -27,4 +27,11 @@ public class AfishaManager {
   public void removeById(int id) {
     repository.removeById(id);
   }
+
+    public removeAll(MoviePoster item) {
+    MoviePoster[] items = repository.findAll();
+    MoviePoster[] result = new MoviePoster[0];
+    repository.removeAll(item);
+    return;
+  }
 }

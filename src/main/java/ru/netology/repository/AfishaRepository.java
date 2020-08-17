@@ -35,21 +35,19 @@ public class AfishaRepository {
   }
 
   //  возвращает объект по идентификатору (либо null, если такого объекта нет)
-  public void findById(int id) {
+  public MoviePoster[] findById(int id) {
     MoviePoster[] tmp = new MoviePoster[1];
     for (MoviePoster item : items) {
       if (item.getId() == id) {
         tmp[0] = item;
+        return tmp;
       }
-      return;
     }
-    items = tmp;
+    return null;
   }
 
   //  полностью вычищает репозиторий
-  public void removeAll(MoviePoster item) {
-    MoviePoster[] tmp = new MoviePoster[items.length];
-    System.arraycopy(items, 0, tmp, 0, 0);
-    items = tmp;
+  public void removeAll() {
+    items = new MoviePoster[0];
   }
 }

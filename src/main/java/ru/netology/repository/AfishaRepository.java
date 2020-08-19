@@ -35,12 +35,10 @@ public class AfishaRepository {
   }
 
   //  возвращает объект по идентификатору (либо null, если такого объекта нет)
-  public MoviePoster[] findById(int id) {
-    MoviePoster[] tmp = new MoviePoster[1];
+  public MoviePoster findById(int id) {
     for (MoviePoster item : items) {
       if (item.getId() == id) {
-        tmp[0] = item;
-        return tmp;
+        return item;
       }
     }
     return null;
@@ -50,4 +48,5 @@ public class AfishaRepository {
   public void removeAll() {
     items = new MoviePoster[0];
   }
+
 }
